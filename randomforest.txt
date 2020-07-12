@@ -1,0 +1,83 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df.isnull().sum()
+
+id                        0
+clump_thickness           0
+unif_cell_size            0
+unif_cell_shape           0
+marginal_adhesion         0
+single_epith_cell_size    0
+bare_nuclei               0
+bland_chromatin           0
+normal_nucleoli           0
+mitoses                   0
+class                     0
+dtype: int64
+df.dropna(inplace=True)
+CORRELATION
+
+df.columns
+Index(['id', 'clump_thickness', 'unif_cell_size', 'unif_cell_shape',
+       'marginal_adhesion', 'single_epith_cell_size', 'bare_nuclei',
+       'bland_chromatin', 'normal_nucleoli', 'mitoses', 'class'],
+      dtype='object')
+df.describe()
+id	clump_thickness	unif_cell_size	unif_cell_shape	marginal_adhesion	single_epith_cell_size	bland_chromatin	normal_nucleoli	mitoses	class
+count	6.990000e+02	699.000000	699.000000	699.000000	699.000000	699.000000	699.000000	699.000000	699.000000	699.000000
+mean	1.071704e+06	4.417740	3.134478	3.207439	2.806867	3.216023	3.437768	2.866953	1.589413	2.689557
+std	6.170957e+05	2.815741	3.051459	2.971913	2.855379	2.214300	2.438364	3.053634	1.715078	0.951273
+min	6.163400e+04	1.000000	1.000000	1.000000	1.000000	1.000000	1.000000	1.000000	1.000000	2.000000
+25%	8.706885e+05	2.000000	1.000000	1.000000	1.000000	2.000000	2.000000	1.000000	1.000000	2.000000
+50%	1.171710e+06	4.000000	1.000000	1.000000	1.000000	2.000000	3.000000	1.000000	1.000000	2.000000
+75%	1.238298e+06	6.000000	5.000000	5.000000	4.000000	4.000000	5.000000	4.000000	1.000000	4.000000
+max	1.345435e+07	10.000000	10.000000	10.000000	10.000000	10.000000	10.000000	10.000000	10.000000	4.000000
+sns.set_style('darkgrid')
+sns.boxplot(df['class'],df['unif_cell_size'])
+​
+<matplotlib.axes._subplots.AxesSubplot at 0x1f26e3b2788>
+
+sns.set_style('darkgrid')
+sns.boxplot(df['class'],df['clump_thickness'])
+<matplotlib.axes._subplots.AxesSubplot at 0x1f26e436108>
+
+sns.set_style('darkgrid')
+sns.boxplot(df['class'],df['normal_nucleoli'])
+<matplotlib.axes._subplots.AxesSubplot at 0x1f26e4a1048>
+
+import numpy as np
+df.replace('?',np.nan,inplace=True)
+df.isnull().sum()
+id                         0
+clump_thickness            0
+unif_cell_size             0
+unif_cell_shape            0
+marginal_adhesion          0
+single_epith_cell_size     0
+bare_nuclei               16
+bland_chromatin            0
+normal_nucleoli            0
+mitoses                    0
+class                      0
+dtype: int64
+df.dropna(inplace=True)
+df.shape
+(683, 11)
+x= df.drop(['class'],axis=1)
+y=df['class']
+x.head()
+id	clump_thickness	unif_cell_size	unif_cell_shape	marginal_adhesion	single_epith_cell_size	bare_nuclei	bland_chromatin	normal_nucleoli	mitoses
+0	1000025	5	1	1	1	2	1	3	1	1
+1	1002945	5	4	4	5	7	10	3	2	1
+2	1015425	3	1	1	1	2	2	3	1	1
+3	1016277	6	8	8	1	3	4	3	7	1
+4	1017023	4	1	1	3	2
+
+
+
+clf=SVC(C= 1e7,decision_function_shape='ovo',kernel='rbf')
+
+clf.score(x_test, y_test)
+0.6715328467153284
